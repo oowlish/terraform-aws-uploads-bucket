@@ -3,7 +3,13 @@ variable "name" {
   description = "Name to be used on all the resources as identifier."
 }
 
-variable "forbidden_files" {
+variable "s3_allowed_roles" {
+  type        = list(string)
+  default     = []
+  description = "A list IAM roles allowed to access the S3 bucket."
+}
+
+variable "s3_forbidden_files" {
   type        = list(string)
   default     = []
   description = "A list of file to deny access for."

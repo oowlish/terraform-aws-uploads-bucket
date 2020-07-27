@@ -13,7 +13,8 @@ module "example_uploads" {
 
   name = "example"
 
-  forbidden_files = ["**/*.php"]
+  s3_allowed_roles   = ["arn:aws:iam::999999999999:role/SomeSpecificRole"]
+  s3_forbidden_files = ["**/*.php"]
   
   cloudfront_aliases             = ["uploads.example.com"]
   cloudfront_price_class         = "PriceClass_All"
@@ -38,6 +39,7 @@ module "example_uploads" {
 | cloudfront\_acm\_certificate\_arn | The ARN of the AWS Certificate Manager certificate that you wish to use with this distribution. The ACM certificate must be in US-EAST-1. | `string` | `""` | no |
 | cloudfront\_aliases | CNAMEs for this CloudFront. | `list(string)` | n/a | yes |
 | cloudfront\_price\_class | The price class for this CloudFront. One of PriceClass\_All, PriceClass\_200, PriceClass\_100. | `string` | `"PriceClass_100"` | no |
-| forbidden\_files | A list of file to deny access for. | `list(string)` | `[]` | no |
 | name | Name to be used on all the resources as identifier. | `string` | n/a | yes |
+| s3\_allowed\_roles | A list IAM roles allowed to access the S3 bucket. | `list(string)` | `[]` | no |
+| s3\_forbidden\_files | A list of file to deny access for. | `list(string)` | `[]` | no |
 | tags | A map of tags to assign to the resources. | `map(string)` | `{}` | no |

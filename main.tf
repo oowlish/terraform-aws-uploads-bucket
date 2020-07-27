@@ -17,17 +17,17 @@ data "aws_iam_policy_document" "this" {
     principals {
       type = "AWS"
 
-      identifiers = [
-        aws_cloudfront_origin_access_identity.this.iam_arn,
-        aws_iam_role.ecs_task_execution.arn
-      ]
+      identifiers = merge(
+        [aws_cloudfront_origin_access_identity.this.iam_arn],
+        [var.s3_allowed_roles]
+      )
     }
   }
 
   statement {
     effect    = "Deny"
     actions   = ["s3:GetObject"]
-    resources = [for file in var.forbidden_files : format("${aws_s3_bucket.this.arn}/%s", file)]
+    resources = [for file in var.s3_forbidden_files : format("${aws_s3_bucket.this.arn}/%s", file)]
 
     principals {
       type        = "*"
