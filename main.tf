@@ -51,6 +51,8 @@ resource "aws_s3_bucket_policy" "this" {
 resource "aws_cloudfront_origin_access_identity" "this" {}
 
 resource "aws_cloudfront_distribution" "this" {
+  comment = var.comment == "" ? format("CDN for Uploads (%s)", var.name) : var.comment
+
   enabled     = true
   aliases     = var.cloudfront_aliases
   price_class = var.cloudfront_price_class

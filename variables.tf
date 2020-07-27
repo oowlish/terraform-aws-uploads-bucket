@@ -3,6 +3,12 @@ variable "name" {
   description = "Name to be used on all the resources as identifier."
 }
 
+variable "comment" {
+  type        = string
+  default     = ""
+  description = "Any comments you want to include."
+}
+
 variable "s3_allowed_roles" {
   type        = list(string)
   default     = []
