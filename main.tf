@@ -19,7 +19,7 @@ data "aws_iam_policy_document" "this" {
 
       identifiers = merge(
         [aws_cloudfront_origin_access_identity.this.iam_arn],
-        [var.s3_allowed_roles]
+        var.s3_allowed_roles
       )
     }
   }
